@@ -31,6 +31,10 @@
   },
   "dependencies": {
     "@types/node": "*",
-    "mam": "*"
+    "mam": "*",
+    "undici": "^5.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2"
   }
 }

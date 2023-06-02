@@ -8,7 +8,7 @@
 		"noEmitHelpers": true,
 		"experimentalDecorators": true,
 		"noImplicitAny": true,
-		"suppressImplicitAnyIndexErrors": true,
+		"suppressImplicitAnyIndexErrors": false,
 		"alwaysStrict": true,
 		"strict": true,
 		"allowUnusedLabels": true,
@@ -17,16 +17,21 @@
 		"inlineSources" : true ,
 		"declaration" : true,
 		"skipLibCheck" : true,
-		"types" : ["node"]
+		"types": ["node"],
+		"baseUrl": ".",
+		"paths": {"*": [
+			"node_modules/*",
+			"src/types/*"
+		  ]}
 	},
 	"include": [
 		"**/*.ts",
-		"**/*.tsx"
+		"**/*.tsx",
+		"./types/global.d.ts"
 	],
 	"exclude": [
 		"**/node_modules",
-		"**/.*/",
-		"**/-/*"
+		"**/.*/"
 	],
 	"atom": {
 		"rewriteTsconfig": false
