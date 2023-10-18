@@ -16,7 +16,7 @@
 		"inlineSources" : true ,
 		"declaration" : true,
 		"skipLibCheck" : true,
-		"types": ["node"],
+		"types" : ["node","gsap/types"],
 		"baseUrl": ".",
 		"paths": {"*": [
 			"node_modules/*",
