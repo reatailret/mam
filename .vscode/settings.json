@@ -28,5 +28,5 @@
     "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
     "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
     "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
-	
+    "editor.renderWhitespace": "trailing"
 }

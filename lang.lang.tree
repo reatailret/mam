@@ -1,14 +1,13 @@
 lang kind
-	[] [] keyword \exact
-	[] [: keyword \prefix
+	[] [] operator \Exact match
+	[] [: operator \Math by prefix
+	[] kind keyword \Language tokens description
 	[] operator keyword
 	[] keyword keyword
 	[] comment keyword
 	[] string keyword
-	[] keyword keyword
 	[] number keyword
 	[] regexp keyword
-	[] operator keyword
 	[] namespace keyword
 	[] type keyword
 	[] struct keyword
