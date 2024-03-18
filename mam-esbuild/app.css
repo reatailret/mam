@@ -1,0 +1,542 @@
+/* mol/view/view/view.css */
+[mol_view] {
+  transition-property:
+    height,
+    width,
+    min-height,
+    min-width,
+    max-width,
+    max-height,
+    transform;
+  transition-duration: .2s;
+  transition-timing-function: ease-out;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  contain: style;
+  scrollbar-color: var(--mol_theme_line) transparent;
+  scrollbar-width: thin;
+}
+[mol_view]::selection {
+  background: var(--mol_theme_line);
+}
+[mol_view]::-webkit-scrollbar {
+  width: .25rem;
+  height: .25rem;
+}
+[mol_view]::-webkit-scrollbar-corner {
+  background-color: var(--mol_theme_line);
+}
+[mol_view]::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+[mol_view]::-webkit-scrollbar-thumb {
+  background-color: var(--mol_theme_line);
+  border-radius: var(--mol_gap_round);
+}
+[mol_view] > * {
+  word-break: inherit;
+}
+[mol_view_root] {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background: var(--mol_theme_back);
+  color: var(--mol_theme_text);
+  contain: unset;
+  tab-size: 4;
+  overscroll-behavior: contain;
+}
+@media print {
+  [mol_view_root] {
+    height: auto;
+  }
+}
+[mol_view][mol_view_error]:not([mol_view_error=Promise]) {
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      #f92323,
+      #f92323 .5rem,
+      #ff3d3d .5rem,
+      #ff3d3d 1.5rem);
+  color: black;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes mol_view_wait {
+  from {
+    opacity: .25;
+  }
+  20% {
+    opacity: .75;
+  }
+  to {
+    opacity: .25;
+  }
+}
+:where([mol_view][mol_view_error=Promise]) {
+  background: var(--mol_theme_hover);
+}
+[mol_view][mol_view_error=Promise] {
+  animation: mol_view_wait 1s steps(20, end) infinite;
+}
+
+/* mol/theme/theme.css */
+:root {
+  --mol_theme_hue: 210deg;
+  --mol_theme_hue_spread: 90deg;
+}
+:where([mol_theme]) {
+  color: var(--mol_theme_text);
+  fill: var(--mol_theme_text);
+  background-color: var(--mol_theme_back);
+}
+:root,
+[mol_theme="$mol_theme_dark"],
+:where([mol_theme="$mol_theme_dark"]) [mol_theme] {
+  --mol_theme_luma: -1;
+  --mol_theme_image: invert(1) hue-rotate( 180deg );
+  --mol_theme_back: hsl( var(--mol_theme_hue), 20%, 10% );
+  --mol_theme_card: hsl( var(--mol_theme_hue), 50%, 20%, .25 );
+  --mol_theme_field: hsl( var(--mol_theme_hue), 50%, 8%, .25 );
+  --mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );
+  --mol_theme_text: hsl( var(--mol_theme_hue), 0%, 80% );
+  --mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 60%, 1 );
+  --mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .2 );
+  --mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 65% );
+  --mol_theme_control: hsl( var(--mol_theme_hue), 60%, 65% );
+  --mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 60%, 65% );
+  --mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 60%, 65% );
+}
+[mol_theme="$mol_theme_light"],
+:where([mol_theme="$mol_theme_light"]) [mol_theme] {
+  --mol_theme_luma: 1;
+  --mol_theme_image: none;
+  --mol_theme_back: hsl( var(--mol_theme_hue), 20%, 92% );
+  --mol_theme_card: hsl( var(--mol_theme_hue), 50%, 100%, .5 );
+  --mol_theme_field: hsl( var(--mol_theme_hue), 50%, 100%, .75 );
+  --mol_theme_hover: hsl( var(--mol_theme_hue), 0%, 50%, .1 );
+  --mol_theme_text: hsl( var(--mol_theme_hue), 0%, 0% );
+  --mol_theme_shade: hsl( var(--mol_theme_hue), 0%, 40%, 1 );
+  --mol_theme_line: hsl( var(--mol_theme_hue), 0%, 50%, .2 );
+  --mol_theme_focus: hsl( calc( var(--mol_theme_hue) + 180deg ), 100%, 40% );
+  --mol_theme_control: hsl( var(--mol_theme_hue), 80%, 30% );
+  --mol_theme_current: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 80%, 30% );
+  --mol_theme_special: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 80%, 30% );
+}
+:where(:root, [mol_theme="$mol_theme_dark"]) [mol_theme="$mol_theme_base"] {
+  --mol_theme_back: hsl( var(--mol_theme_hue), 50%, 30% );
+  --mol_theme_card: hsl( var(--mol_theme_hue), 40%, 20%, .25 );
+}
+:where([mol_theme="$mol_theme_light"]) [mol_theme="$mol_theme_base"] {
+  --mol_theme_back: hsl( var(--mol_theme_hue), 50%, 80% );
+  --mol_theme_card: hsl( var(--mol_theme_hue), 80%, 95%, .25 );
+}
+:where(:root, [mol_theme="$mol_theme_dark"]) [mol_theme="$mol_theme_accent"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) + 180deg ), 90%, 30% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) + 180deg ), 80%, 20%, .25 );
+}
+:where([mol_theme="$mol_theme_light"]) [mol_theme="$mol_theme_accent"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) + 180deg ), 90%, 75% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) + 180deg ), 80%, 90%, .25 );
+}
+:where(:root, [mol_theme="$mol_theme_dark"]) [mol_theme="$mol_theme_current"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 50%, 30% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 40%, 20%, .25 );
+}
+:where([mol_theme="$mol_theme_light"]) [mol_theme="$mol_theme_current"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 50%, 92% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) - var(--mol_theme_hue_spread) ), 80%, 100%, .5 );
+}
+:where(:root, [mol_theme="$mol_theme_dark"]) [mol_theme="$mol_theme_special"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 50%, 30% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 40%, 20%, .25 );
+}
+:where([mol_theme="$mol_theme_light"]) [mol_theme="$mol_theme_special"] {
+  --mol_theme_back: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 50%, 92% );
+  --mol_theme_card: hsl( calc( var(--mol_theme_hue) + var(--mol_theme_hue_spread) ), 80%, 100%, .5 );
+}
+
+/* mol/gap/gap.css */
+:root {
+  --mol_gap_block: .75rem;
+  --mol_gap_text: .5rem .75rem;
+  --mol_gap_round: .25rem;
+  --mol_gap_space: .25rem;
+  --mol_gap_blur: .5rem;
+}
+
+/* mol/pop/pop.view.css */
+[mol_pop] {
+  position: relative;
+  display: inline-flex;
+}
+[mol_pop_bubble] {
+  box-shadow: 0 0 1rem hsla(0, 0%, 0%, .5);
+  border-radius: var(--mol_gap_round);
+  position: absolute;
+  z-index: var(--mol_layer_popup);
+  background: var(--mol_theme_back);
+  max-width: none;
+  max-height: none;
+  word-break: normal;
+  width: max-content;
+  height: max-content;
+  flex-direction: column;
+  max-width: 80vw;
+  max-height: 80vw;
+  contain: paint;
+}
+:where([mol_pop_bubble] > *) {
+  background: var(--mol_theme_card);
+}
+[mol_pop_bubble][mol_scroll] {
+  background: var(--mol_theme_back);
+}
+[mol_pop_bubble]:focus {
+  outline: none;
+}
+[mol_pop_align=suspense_suspense] {
+  opacity: 0;
+}
+[mol_pop_align=left_top] {
+  transform: translate(-100%);
+  left: 0;
+  bottom: 0;
+}
+[mol_pop_align=left_center] {
+  transform: translate(-100%, -50%);
+  left: 0;
+  top: 50%;
+}
+[mol_pop_align=left_bottom] {
+  transform: translate(-100%);
+  left: 0;
+  top: 0;
+}
+[mol_pop_align=right_top] {
+  transform: translate(100%);
+  right: 0;
+  bottom: 0;
+}
+[mol_pop_align=right_center] {
+  transform: translate(100%, -50%);
+  right: 0;
+  top: 50%;
+}
+[mol_pop_align=right_bottom] {
+  transform: translate(100%);
+  right: 0;
+  top: 0;
+}
+[mol_pop_align=center] {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+[mol_pop_align=top_left] {
+  right: 0;
+  bottom: 100%;
+}
+[mol_pop_align=top_center] {
+  transform: translate(-50%);
+  left: 50%;
+  bottom: 100%;
+}
+[mol_pop_align=top_right] {
+  left: 0;
+  bottom: 100%;
+}
+[mol_pop_align=bottom_left] {
+  right: 0;
+  top: 100%;
+}
+[mol_pop_align=bottom_center] {
+  transform: translate(-50%);
+  left: 50%;
+  top: 100%;
+}
+[mol_pop_align=bottom_right] {
+  left: 0;
+  top: 100%;
+}
+
+/* mol/string/string.view.css */
+[mol_string] {
+  box-sizing: border-box;
+  outline-offset: 0;
+  border: none;
+  border-radius: var(--mol_gap_round);
+  white-space: pre-line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: var(--mol_gap_text);
+  text-align: left;
+  position: relative;
+  font: inherit;
+  flex: 1 1 auto;
+  background: transparent;
+  min-width: 0;
+  color: inherit;
+  background: var(--mol_theme_field);
+}
+[mol_string]:disabled:not(:placeholder-shown) {
+  background-color: transparent;
+  color: var(--mol_theme_text);
+}
+[mol_string]:where(:not(:disabled)) {
+  box-shadow: inset 0 0 0 1px var(--mol_theme_line);
+}
+[mol_string]:where(:not(:disabled)):hover {
+  box-shadow: inset 0 0 0 2px var(--mol_theme_line);
+  z-index: var(--mol_layer_hover);
+}
+[mol_string]:focus {
+  outline: none;
+  z-index: var(--mol_layer_focus);
+  color: var(--mol_theme_text);
+  box-shadow: inset 0 0 0 1px var(--mol_theme_focus);
+}
+[mol_string]::placeholder {
+  color: var(--mol_theme_shade);
+}
+[mol_string]::-ms-clear {
+  display: none;
+}
+
+/* mol/svg/root/root.view.css */
+[mol_svg_root] {
+  overflow: hidden;
+}
+
+/* mol/icon/icon.view.css */
+[mol_icon] {
+  fill: currentColor;
+  stroke: none;
+  width: 1em;
+  height: 1.5em;
+  flex: 0 0 auto;
+  vertical-align: top;
+  display: inline-block;
+  filter: drop-shadow(0px 1px 1px var(--mol_theme_back));
+  transform-origin: center;
+}
+[mol_icon_path] {
+  transform-origin: center;
+}
+
+/* mol/speck/speck.view.css */
+[mol_speck] {
+  font-size: .625rem;
+  border-radius: 1rem;
+  margin: -0.5rem -0.25rem;
+  align-self: flex-start;
+  min-height: 1em;
+  min-width: .5em;
+  vertical-align: sub;
+  padding: .25em .5em;
+  position: absolute;
+  z-index: var(--mol_layer_speck);
+  text-align: center;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+/* mol/button/button.view.css */
+[mol_button] {
+  border: none;
+  font: inherit;
+  display: inline-flex;
+  flex-shrink: 0;
+  text-decoration: inherit;
+  cursor: inherit;
+  position: relative;
+  box-sizing: border-box;
+  word-break: normal;
+  cursor: default;
+  user-select: none;
+  border-radius: var(--mol_gap_round);
+}
+[mol_button]:where(:not(:disabled)):hover {
+  z-index: var(--mol_layer_hover);
+}
+[mol_button]:focus-visible {
+  outline: none;
+  z-index: var(--mol_layer_focus);
+}
+
+/* mol/button/typed/typed.view.css */
+[mol_button_typed] {
+  align-content: center;
+  align-items: center;
+  padding: var(--mol_gap_text);
+  border-radius: var(--mol_gap_round);
+  gap: var(--mol_gap_space);
+  user-select: none;
+  cursor: pointer;
+}
+[mol_button_typed][disabled] {
+  pointer-events: none;
+}
+[mol_button_typed]:hover,
+[mol_button_typed]:focus-visible {
+  background-color: var(--mol_theme_hover);
+}
+[mol_button_typed]:active {
+  color: var(--mol_theme_focus);
+}
+
+/* mol/button/minor/minor.view.css */
+[mol_button_minor] {
+  color: var(--mol_theme_control);
+}
+[mol_button_minor][disabled] {
+  color: var(--mol_theme_shade);
+}
+
+/* mol/list/list.view.css */
+[mol_list] {
+  will-change: contents;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  max-width: 100%;
+  transition: none;
+  min-height: 1.5rem;
+}
+[mol_list_gap_before],
+[mol_list_gap_after] {
+  display: block !important;
+  flex: none;
+  transition: none;
+  overflow-anchor: none;
+}
+
+/* mol/paragraph/paragraph.view.css */
+:where([mol_paragraph]) {
+  margin: 0;
+  max-width: 100%;
+}
+
+/* mol/dimmer/dimmer.view.css */
+[mol_dimmer] {
+  display: block;
+  max-width: 100%;
+}
+[mol_dimmer_low] {
+  display: inline;
+  opacity: 0.8;
+}
+[mol_dimmer_high] {
+  display: inline;
+  color: var(--mol_theme_focus);
+  text-shadow: 0 0;
+}
+
+/* mol/search/search.view.css */
+[mol_search] {
+  align-self: flex-start;
+  flex: auto;
+}
+[mol_search_anchor] {
+  flex: 1 1 auto;
+}
+[mol_search_query] {
+  flex-grow: 1;
+}
+[mol_search_menu] {
+  min-height: .75rem;
+  display: flex;
+}
+[mol_search_suggest] {
+  text-align: left;
+}
+[mol_search_suggest_label_high] {
+  color: var(--mol_theme_shade);
+  text-shadow: none;
+}
+
+/* mol/check/check.css */
+[mol_check] {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  align-content: center;
+  border: none;
+  font-weight: inherit;
+  box-shadow: none;
+  text-align: left;
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+[mol_check_title] {
+  flex-shrink: 1;
+}
+
+/* mol/check/icon/icon.view.css */
+[mol_check_icon]:where([mol_check_checked]) {
+  color: var(--mol_theme_current);
+}
+
+/* mol/row/row.view.css */
+[mol_row] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  padding: var(--mol_gap_block);
+  gap: var(--mol_gap_block);
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+[mol_row] > * {
+  max-width: 100%;
+}
+
+/* mol/icon/demo/demo.view.css */
+[mol_icon_demo_title] {
+  flex-grow: 0;
+}
+[mol_icon_demo_tools] {
+  flex-grow: 1;
+}
+[mol_icon_demo_icons_filter] {
+  align-self: stretch;
+  flex: 1;
+}
+[mol_icon_demo_row] {
+  flex-wrap: wrap;
+}
+[mol_icon_demo_row_icon] {
+  width: 24px;
+  height: 24px;
+}
+:where([mol_icon_demo_row]:hover) [mol_icon_demo_row_icon] {
+  transform: scale(2);
+}
+[mol_icon_demo_row_descr] {
+  color: var(--mol_theme_shade);
+}
+
+/* mol/vite/vite.view.css */
+[mol_vite_body] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

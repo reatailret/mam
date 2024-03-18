@@ -28,5 +28,6 @@
     "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
     "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
     "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
-    "editor.renderWhitespace": "trailing"
+    "editor.renderWhitespace": "trailing",
+    "liveServer.settings.port": 5526
 }
