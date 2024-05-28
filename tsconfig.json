@@ -15,13 +15,9 @@
 		"sourceMap" : true ,
 		"inlineSources" : true ,
 		"declaration" : true,
-		"skipLibCheck" : true,
-		"types" : ["node","gsap/types"],
-		"baseUrl": ".",
-		"paths": {"*": [
-			"node_modules/*",
-			"src/types/*"
-		  ]}
+		"skipLibCheck" : false,
+		"skipDefaultLibCheck": true,
+		"types" : ["node"]
 	},
 	"include": [
 		"**/*.ts",
